@@ -53,7 +53,7 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     public void addNewUser(View view) {
-        startActivity(new Intent(this,MainActivity.class));
+        startActivity(new Intent(this,SignUpActivity.class));
     }
 
 

@@ -23,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     DatabaseReference firebaseRef;
     private FirebaseAuth mAuth;
 
@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
                             p.dismiss();
                             this.clearForm();
 
-                            Toast.makeText(MainActivity.this, "User Registered Succesfully", Toast.LENGTH_LONG);
-                            startActivity(new Intent(MainActivity.this, ServicesActivity.class));
+                            Toast.makeText(SignUpActivity.this, "User Registered Succesfully", Toast.LENGTH_LONG);
+                            startActivity(new Intent(SignUpActivity.this, ServicesActivity.class));
                         }
 
                         private void clearForm() {
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
                     });
                 } else {
-                    Toast.makeText(MainActivity.this, "User Registration Failed.. Please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this, "User Registration Failed.. Please try again", Toast.LENGTH_SHORT).show();
                     p.dismiss();
                 }
 
