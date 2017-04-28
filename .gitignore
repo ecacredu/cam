@@ -2,6 +2,8 @@
 *.apk
 *.ap_
 
+app/src/main/res/drawable/*.png
+
 # Files for the ART/Dalvik VM
 *.dex
 

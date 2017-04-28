@@ -24,6 +24,7 @@ public class SignInActivity extends AppCompatActivity {
   private EditText mEmail;
   private EditText mPass;
   private Button mSubmit;
+  private Button mSignUp;
 
   private FirebaseAuth mAuth;
 
@@ -56,7 +57,7 @@ public class SignInActivity extends AppCompatActivity {
 
         if(TextUtils.isEmpty(mPass.getText().toString().trim())){
           makeToast("Password required!");
-          mPass.setError("Password required");
+          mPassFloat.setError("Password required");
           return;
         }
 
@@ -69,6 +70,13 @@ public class SignInActivity extends AppCompatActivity {
         mEmailFloat.setErrorEnabled(false);
         mPassFloat.setErrorEnabled(false);
         signIn(mEmail.getText().toString().trim(),mPass.getText().toString().trim());
+      }
+    });
+
+    mSignUp.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
       }
     });
   }
@@ -99,6 +107,7 @@ public class SignInActivity extends AppCompatActivity {
     mEmail = (EditText) findViewById(R.id.signin_mail);
     mPass = (EditText) findViewById(R.id.signin_pass);
     mSubmit = (Button) findViewById(R.id.signInSubmit);
+    mSignUp = (Button) findViewById(R.id.signUpButton);
     mEmailFloat = (TextInputLayout) findViewById(R.id.signin_mailFloat);
     mPassFloat = (TextInputLayout) findViewById(R.id.signin_passFloat);
 

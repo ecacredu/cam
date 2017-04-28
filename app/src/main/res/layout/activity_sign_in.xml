@@ -56,6 +56,15 @@
       android:layout_marginTop="30dp"
       android:text="Sign In"
       style="@style/Widget.AppCompat.Button.Colored"/>
+
+
+    <Button
+      android:id="@+id/signUpButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:text="Sign Up"
+      android:textAlignment="center"/>
   </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

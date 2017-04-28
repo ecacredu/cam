@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.CheckBox;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.acecosmos.camle.adapters.FitServicesAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,14 +21,20 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+import co.ceryle.fitgridview.FitGridView;
+
 public class ServicesActivity extends AppCompatActivity {
+
+    private FitGridView fitgridView;
+
+    private Button mAddService;
 
     DatabaseReference firebaseRef;
     private FirebaseAuth mAuth;
 
+    FitServicesAdapter fitGridAdapter;
     ProgressDialog p;
 
-    ArrayList<String> selectedServices = new ArrayList<String>();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
@@ -34,212 +42,53 @@ public class ServicesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Select you Services");
         p=new ProgressDialog(this);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         firebaseRef = database.getReference("");
         mAuth = FirebaseAuth.getInstance();
 
+        findViews();
+
     }
 
-    public void serviceChanged(View view) {
-        boolean checked = ((CheckBox) view).isChecked();
-        switch (view.getId()){
-            case R.id.cinematography :
-                if(checked){
+  private void findViews() {
+    fitgridView = (FitGridView) findViewById(R.id.fitgridView);
+    fitGridAdapter = new FitServicesAdapter(this);
+    fitgridView.setFitGridAdapter(fitGridAdapter);
 
-                    selectedServices.add("cinematographhy");
-                }
-                else{
-                    selectedServices.remove("cinematographhy");
-                }
-                break;
+  }
 
-            case R.id.maternity :
-                if(checked){
-                    selectedServices.add("maternity");
-                }
-                else{
-                    selectedServices.remove("maternity");
-                }
-                break;
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.services_selection_menu, menu);
+    return true;
+  }
 
-            case R.id.traditional :
-                if(checked){
-                    selectedServices.add("traditional");
-                }
-                else{
-                    selectedServices.remove("traditional");
-                }
-                break;
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+    int id = item.getItemId();
+    if (id == R.id.action_services_done) {
+      addServices();
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
 
-            case R.id.birthday :
-                if(checked){
-                    selectedServices.add("birthday");
-                }
-                else{
-                    selectedServices.remove("birthday");
-                }
-                break;
+    public void addServices() {
 
+        ArrayList<Integer> servicePositions = fitGridAdapter.getSelectedPositions();
 
-            case R.id.videoEditing :
-                if(checked){
-                    selectedServices.add("videoEditing");
-                }
-                else{
-                    selectedServices.remove("videoEditing");
-                }
-                break;
-
-
-            case R.id.preWedding :
-                if(checked){
-                    selectedServices.add("preWedding");
-                }
-                else{
-                    selectedServices.remove("preWedding");
-                }
-                break;
-
-
-            case R.id.kids :
-                if(checked){
-                    selectedServices.add("kids");
-                }
-                else{
-                    selectedServices.remove("kids");
-                }
-                break;
-
-
-            case R.id.events :
-                if(checked){
-                    selectedServices.add("events");
-                }
-                else{
-                    selectedServices.remove("events");
-                }
-                break;
-
-
-            case R.id.commercial :
-                if(checked){
-                    selectedServices.add("commercial");
-                }
-                else{
-                    selectedServices.remove("commercial");
-                }
-                break;
-
-
-            case R.id.makeup :
-                if(checked){
-                    selectedServices.add("makeup");
-                }
-                else{
-                    selectedServices.remove("makeup");
-                }
-                break;
-
-
-            case R.id.conceptionAndArtisticDirection :
-                if(checked){
-                    selectedServices.add("conceptionAndArtisticDirection");
-                }
-                else{
-                    selectedServices.remove("conceptionAndArtisticDirection");
-                }
-                break;
-
-            case R.id.soundEditing :
-                if(checked){
-                    selectedServices.add("soundEditing");
-                }
-                else{
-                    selectedServices.remove("soundEditing");
-                }
-                break;
-
-
-            case R.id.products :
-                if(checked){
-                    selectedServices.add("products");
-                }
-                else{
-                    selectedServices.remove("products");
-                }
-                break;
-
-            case R.id.candid :
-                if(checked){
-                    selectedServices.add("candid");
-                }
-                else{
-                    selectedServices.remove("candid");
-                }
-                break;
-
-            case R.id.scripting :
-                if(checked){
-                    selectedServices.add("scripting");
-                }
-                else{
-                    selectedServices.remove("scripting");
-                }
-                break;
-
-            case R.id.fashionOrModel :
-                if(checked){
-                    selectedServices.add("fashionOrModel");
-                }
-                else{
-                    selectedServices.remove("fashionOrModel");
-                }
-                break;
-
-            case R.id.corporate :
-                if(checked){
-                    selectedServices.add("corporate");
-                }
-                else{
-                    selectedServices.remove("corporate");
-                }
-                break;
-            case R.id.wedding :
-                if(checked){
-                    selectedServices.add("wedding");
-                }
-                else{
-                    selectedServices.remove("wedding");
-                }
-                break;
-
-            case R.id.vfxArtist :
-                if(checked){
-                    selectedServices.add("vfxArtist");
-                }
-                else{
-                    selectedServices.remove("vfxArtist");
-                }
-                break;
-
-            case R.id.retouchingAndManipulation :
-                if(checked){
-                    selectedServices.add("retouchingAndManipulation");
-                }
-                else{
-                    selectedServices.remove("retouchingAndManipulation");
-                }
-                break;
-
-
-
+        if(servicePositions.size()==0){
+          Toast.makeText(ServicesActivity.this, "", Toast.LENGTH_LONG).show();
+          return;
         }
-    }
-
-    public void addServicesButton(View view) {
         p.show();
         p.setMessage("Adding services to the user");
         p.setCancelable(false);
@@ -249,8 +98,8 @@ public class ServicesActivity extends AppCompatActivity {
         }
         firebaseRef.child("users").child(mAuth.getCurrentUser().getUid().toString().trim()).child("services").setValue(null);
 
-        for(String service : selectedServices){
-            firebaseRef.child("users").child(mAuth.getCurrentUser().getUid().toString().trim()).child("services/"+service).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+        for(Integer service : servicePositions){
+            firebaseRef.child("users").child(mAuth.getCurrentUser().getUid().toString().trim()).child("services/"+fitGridAdapter.getService(service)).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     p.dismiss();

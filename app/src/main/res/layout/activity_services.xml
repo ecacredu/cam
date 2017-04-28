@@ -1,206 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  android:id="@+id/activity_main"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+  <include
+  layout="@layout/toolbar"
+    android:id="@+id/toolbarLayout"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content" />
+
+  <co.ceryle.fitgridview.FitGridView
+    android:id="@+id/fitgridView"
+    android:layout_below="@id/toolbarLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.acecosmos.camle.SignUpActivity">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:listSelector="@android:color/transparent"
+    app:column="3"
+    app:row="7"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+</RelativeLayout>
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+  <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+  <!--xmlns:tools="http://schemas.android.com/tools"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="match_parent"-->
+  <!--tools:context="com.acecosmos.camle.SignUpActivity">-->
 
-        <include
-            layout="@layout/toolbar"
-            layout_width="match_parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+  <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical">-->
 
-        <TextView
-            android:id="@+id/servicesText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="10dp"
-            android:text="List Your Services"
-            android:textSize="18sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+    <!--<TextView-->
+      <!--android:id="@+id/servicesText"-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_marginBottom="10dp"-->
+      <!--android:layout_marginLeft="16dp"-->
+      <!--android:layout_marginTop="10dp"-->
+      <!--android:text="List Your Services"-->
+      <!--android:textSize="18sp" />-->
 
-                <CheckBox
-                    android:id="@+id/cinematography"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Cinematography" />
+    <!--<co.ceryle.fitgridview.FitGridView-->
+      <!--android:id="@+id/fitgridView"-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="match_parent"-->
+      <!--android:listSelector="@android:color/transparent"-->
+      <!--app:column="4"-->
+      <!--app:row="6"/>-->
 
-                <CheckBox
-                    android:id="@+id/maternity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Maternity" />
+    <!--&lt;!&ndash;<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"&ndash;&gt;-->
+      <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+      <!--&lt;!&ndash;android:layout_height="match_parent">&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/traditional"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Traditional" />
+      <!--&lt;!&ndash;<GridView&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/servicesGrid"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:horizontalSpacing="10dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:numColumns="3"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:stretchMode="columnWidth"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:verticalSpacing="10dp" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</FrameLayout>&ndash;&gt;-->
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginLeft="16dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="horizontal">&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/birthday"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Birthday" />
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="150dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/videoEditing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Video Editing" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/cinematography"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Cinematography" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/preWedding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Pre Wedding" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/maternity"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Maternity" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/kids"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Kids" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/traditional"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Traditional" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/events"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Events" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/birthday"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Birthday" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/commercial"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Commercial" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/videoEditing"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Video Editing" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/makeup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Makeup" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/preWedding"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Pre Wedding" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/conceptionAndArtisticDirection"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Conception and Artistic Direction" />
-            </LinearLayout>
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/kids"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Kids" />&ndash;&gt;-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="16dp"
-                android:orientation="vertical">
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/events"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Events" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/soundEditing"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Sound Editing" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/commercial"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Commercial" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/products"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Products" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/makeup"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Makeup" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/candid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Candid" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/conceptionAndArtisticDirection"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Conception and Artistic Direction" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/scripting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Scripting" />
+    <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_marginRight="16dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:orientation="vertical">&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/architectureOrAmbience"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Architecture/Ambience" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/soundEditing"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Sound Editing" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/fashionOrModel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Fashion/Model" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/products"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Products" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/corporate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Corporate" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/candid"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Candid" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/wedding"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Wedding" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/scripting"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Scripting" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/vfxArtist"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="VFX Artist" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/architectureOrAmbience"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Architecture/Ambience" />&ndash;&gt;-->
 
-                <CheckBox
-                    android:id="@+id/retouchingAndManipulation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="serviceChanged"
-                    android:text="Retouching And Manipulation" />
-            </LinearLayout>
-        </LinearLayout>
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/fashionOrModel"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Fashion/Model" />&ndash;&gt;-->
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:onClick="addServicesButton"
-            android:text="List Services And Add Your Products" />
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/corporate"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Corporate" />&ndash;&gt;-->
 
-    </LinearLayout>
-</ScrollView>
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/wedding"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Wedding" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/vfxArtist"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="VFX Artist" />&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<CheckBox&ndash;&gt;-->
+    <!--&lt;!&ndash;android:id="@+id/retouchingAndManipulation"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:onClick="serviceChanged"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:text="Retouching And Manipulation" />&ndash;&gt;-->
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+    <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
+
+
+
+  <!--</LinearLayout>-->
+<!--</ScrollView>-->

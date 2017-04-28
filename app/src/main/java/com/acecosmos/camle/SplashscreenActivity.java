@@ -59,6 +59,9 @@ public class SplashscreenActivity extends AppCompatActivity {
                   if(dataSnapshot.child("products").getValue()==null){
                     startActivity(new Intent(SplashscreenActivity.this, ProductsActivity.class));
                     finish();
+                  }else{
+                    startActivity(new Intent(SplashscreenActivity.this, HomeActivity.class));
+                    finish();
                   }
                 }
               }
