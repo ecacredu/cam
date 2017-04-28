@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.acecosmos.camle.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar"
+            layout_width="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/servicesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="10dp"
+            android:text="List Your Services"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/cinematography"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Cinematography" />
+
+                <CheckBox
+                    android:id="@+id/maternity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Maternity" />
+
+                <CheckBox
+                    android:id="@+id/traditional"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Traditional" />
+
+                <CheckBox
+                    android:id="@+id/birthday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Birthday" />
+
+                <CheckBox
+                    android:id="@+id/videoEditing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Video Editing" />
+
+                <CheckBox
+                    android:id="@+id/preWedding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Pre Wedding" />
+
+                <CheckBox
+                    android:id="@+id/kids"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Kids" />
+
+                <CheckBox
+                    android:id="@+id/events"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Events" />
+
+                <CheckBox
+                    android:id="@+id/commercial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Commercial" />
+
+                <CheckBox
+                    android:id="@+id/makeup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Makeup" />
+
+                <CheckBox
+                    android:id="@+id/conceptionAndArtisticDirection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Conception and Artistic Direction" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/soundEditing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Sound Editing" />
+
+                <CheckBox
+                    android:id="@+id/products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Products" />
+
+                <CheckBox
+                    android:id="@+id/candid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Candid" />
+
+                <CheckBox
+                    android:id="@+id/scripting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Scripting" />
+
+                <CheckBox
+                    android:id="@+id/architectureOrAmbience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Architecture/Ambience" />
+
+                <CheckBox
+                    android:id="@+id/fashionOrModel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Fashion/Model" />
+
+                <CheckBox
+                    android:id="@+id/corporate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Corporate" />
+
+                <CheckBox
+                    android:id="@+id/wedding"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Wedding" />
+
+                <CheckBox
+                    android:id="@+id/vfxArtist"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="VFX Artist" />
+
+                <CheckBox
+                    android:id="@+id/retouchingAndManipulation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="serviceChanged"
+                    android:text="Retouching And Manipulation" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:onClick="addServicesButton"
+            android:text="List Services And Add Your Products" />
+
+    </LinearLayout>
+</ScrollView>

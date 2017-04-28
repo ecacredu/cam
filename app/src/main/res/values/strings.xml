@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Camle</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="country">Country</string>
+    <string name="profession">Profession</string>
+
+    <string-array name="professions">
+        <item>Photographer</item>
+        <item>Cinematographer</item>
+        <item>Other</item>
+    </string-array>
+
+
+    <string-array name="productTypes">
+        <item>Camera</item>
+        <item>Lens</item>
+        <item>Other</item>
+    </string-array>
+    <string name="title_activity_services">Services</string>
+    <string name="title_activity_products">Products</string>
+</resources>

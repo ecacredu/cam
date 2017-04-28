@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "779605550842",
+    "firebase_url": "https://camle-3f936.firebaseio.com",
+    "project_id": "camle-3f936",
+    "storage_bucket": "camle-3f936.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779605550842:android:f7ad2fe9f0969451",
+        "android_client_info": {
+          "package_name": "com.acecosmos.camle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779605550842-9f2e5fmeic2j11mblsvpi32g1jfpasnk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.acecosmos.camle",
+            "certificate_hash": "39262b7f3109fcce0dc6e701a788d7e2bd3c9a3a"
+          }
+        },
+        {
+          "client_id": "779605550842-955rsuspqll93855o64onil40ug13usn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpL3FLoYLeZdyiGj8LhS2RFLI1xPx23F0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779605550842-955rsuspqll93855o64onil40ug13usn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
