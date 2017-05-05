@@ -1,5 +1,6 @@
 package com.acecosmos.camle;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import co.ceryle.fitgridview.FitGridView;
 
@@ -31,6 +34,9 @@ public class ServicesActivity extends AppCompatActivity {
 
     DatabaseReference firebaseRef;
     private FirebaseAuth mAuth;
+
+    Boolean isEdit;
+    HashMap<String,Object> services;
 
     FitServicesAdapter fitGridAdapter;
     ProgressDialog p;
@@ -46,6 +52,11 @@ public class ServicesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle("Select you Services");
         p=new ProgressDialog(this);
+
+
+        isEdit = getIntent().getBooleanExtra("isEdit",false);
+        services = (HashMap<String, Object>) getIntent().getSerializableExtra("services");
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         firebaseRef = database.getReference("");
         mAuth = FirebaseAuth.getInstance();
@@ -56,8 +67,27 @@ public class ServicesActivity extends AppCompatActivity {
 
   private void findViews() {
     fitgridView = (FitGridView) findViewById(R.id.fitgridView);
-    fitGridAdapter = new FitServicesAdapter(this);
+
+
+
+    if(isEdit){
+      fitGridAdapter = new FitServicesAdapter(this,services);
+    }else{
+      fitGridAdapter = new FitServicesAdapter(this);
+    }
     fitgridView.setFitGridAdapter(fitGridAdapter);
+
+    //    if(isEdit){
+//      if(services.size() > 0){
+//        Iterator it = services.entrySet().iterator();
+//        while (it.hasNext()) {
+//          HashMap.Entry pair = (HashMap.Entry)it.next();
+//          int pos = fitGridAdapter.getServicePos(pair.getKey().toString().replace("_","/"));
+//          fitGridAdapter.addSelectedPosition(pos,fitgridView.getAdapter().getView(pos,null,fitgridView));
+//          it.remove(); // avoids a ConcurrentModificationException
+//        }
+//      }
+//    }
 
   }
 
@@ -99,12 +129,20 @@ public class ServicesActivity extends AppCompatActivity {
         firebaseRef.child("users").child(mAuth.getCurrentUser().getUid().toString().trim()).child("services").setValue(null);
 
         for(Integer service : servicePositions){
-            firebaseRef.child("users").child(mAuth.getCurrentUser().getUid().toString().trim()).child("services/"+fitGridAdapter.getService(service)).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
+          String tempName = fitGridAdapter.getService(service).replace("/","_");
+            firebaseRef.child("users").child(mAuth.getCurrentUser().getUid().toString().trim()).child("services/"+tempName).setValue(true).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     p.dismiss();
                     Toast.makeText(ServicesActivity.this, "User Registered Succesfully", Toast.LENGTH_LONG);
-                    startActivity(new Intent(ServicesActivity.this, ProductsActivity.class));
+
+                    if(isEdit){
+                      Intent returnIntent = new Intent();
+                      setResult(Activity.RESULT_OK, returnIntent);
+                      finish();
+                    }else{
+                      startActivity(new Intent(ServicesActivity.this, ProductSelectionActivity.class));
+                    }
                 }
 
 

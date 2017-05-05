@@ -19,6 +19,37 @@
 
         <include layout="@layout/toolbar" />
 
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:weightSum="1">
+
+        <Space
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight=".25" />
+
+        <ImageButton
+          android:id="@+id/prod_image"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center_horizontal"
+          android:layout_weight=".5"
+          android:adjustViewBounds="true"
+          android:scaleType="fitCenter"
+          android:src="@drawable/placeholder" />
+
+      </LinearLayout>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:text="+ Add Photo"
+        android:textAlignment="center" />
+
         <Spinner
             android:id="@+id/productType"
             android:layout_width="match_parent"
@@ -129,7 +160,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_weight="1.39"
-            android:onClick="addProduct"
             android:text="Add Another Product" />
 
         <Button

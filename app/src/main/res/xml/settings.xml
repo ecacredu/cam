@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="Account Info" >
+    <EditTextPreference
+      android:key="@+id/firstNamePreference"
+      android:title="First Name"
+      android:summary="Change first name"/>
+
+    <EditTextPreference
+      android:title="Last Name"
+      android:summary="Change last name"/>
+
+    <EditTextPreference
+      android:title="Email"
+      android:summary="Change email id"/>
+
+    <EditTextPreference
+      android:title="Mobile"
+      android:summary="Change contact number"/>
+
+    <EditTextPreference
+      android:title="City"
+      android:summary="Change city"/>
+
+    <EditTextPreference
+      android:title="State"
+      android:summary="Change state"/>
+
+    <EditTextPreference
+      android:title="Country"
+      android:summary="Change country"/>
+
+    <ListPreference
+      android:entries="@array/professions"
+      android:summary="Select your preference"
+      android:entryValues="@array/professions"
+      android:title="Profession" />
+  </PreferenceCategory>
+</PreferenceScreen>

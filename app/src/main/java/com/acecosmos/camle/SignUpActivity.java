@@ -86,6 +86,10 @@ public class SignUpActivity extends AppCompatActivity {
         p.setCancelable(false);
         p.show();
 
+        HashMap<String,Object> test=new HashMap<>();
+
+        test.put("s","b");
+
         final HashMap<String, String> user = new HashMap<String, String>();
         user.put("firstName", firstName.getText().toString().trim());
         user.put("lastName", lastName.getText().toString().trim());

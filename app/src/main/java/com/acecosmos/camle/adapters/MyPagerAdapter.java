@@ -7,7 +7,7 @@ import android.util.SparseArray;
 import android.view.ViewGroup;
 
 import com.acecosmos.camle.fragments.BlankFragment;
-import com.acecosmos.camle.fragments.CollaborateFragment;
+import com.acecosmos.camle.fragments.UsersFragment;
 import com.acecosmos.camle.fragments.MyAccountFragment;
 import com.acecosmos.camle.fragments.ProductsFragment;
 
@@ -30,7 +30,7 @@ public class MyPagerAdapter extends FragmentStatePagerAdapter {
       case 0:
         return ProductsFragment.newInstance("ProductsFragment");
       case 1:
-        return CollaborateFragment.newInstance("CollaborateFragment");
+        return UsersFragment.newInstance("UsersFragment");
       case 2:
         return MyAccountFragment.newInstance("MyAccountFragment");
       default:

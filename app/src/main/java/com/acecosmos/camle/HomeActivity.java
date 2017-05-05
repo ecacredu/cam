@@ -26,7 +26,7 @@ public class HomeActivity extends AppCompatActivity {
     setContentView(R.layout.activity_home);
     Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
-
+    toolbar.setTitle("Camle");
     initUI();
     setUI();
 
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity {
 
     mAdapter = new MyPagerAdapter(getSupportFragmentManager());
     mViewPager.setAdapter(mAdapter);
-    mTopNavigationTabStrip.setTitles("Products","Collaborate","My Account");
+    mTopNavigationTabStrip.setTitles("Products","Users","My Account");
     mTopNavigationTabStrip.setAnimationDuration(150);
     mTopNavigationTabStrip.setStripType(NavigationTabStrip.StripType.LINE);
     mTopNavigationTabStrip.setViewPager(mViewPager,0);

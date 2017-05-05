@@ -1,13 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical" android:layout_width="match_parent"
-  android:layout_height="match_parent">
+  android:layout_height="match_parent"
+  android:layout_width="match_parent">
 
-  <TextView
+  <android.support.v7.widget.RecyclerView
+    android:id="@+id/account_recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="Hello blank fragment !"
-    android:textAlignment="center"/>
-
+    android:scrollbars="vertical" />
 </LinearLayout>
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+  <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+  <!--android:layout_width="match_parent"-->
+  <!--android:layout_height="match_parent">-->
 
+  <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+
+    <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="vertical">-->
+
+      <!--<TextView-->
+        <!--android:id="@+id/expand_button_account"-->
+        <!--style="@style/TextAppearance.AppCompat.Small"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/accordion_item_shadow"-->
+        <!--android:elevation="6dp"-->
+        <!--android:foreground="?selectableItemBackground"-->
+        <!--android:gravity="left"-->
+        <!--android:padding="16dp"-->
+        <!--android:text="> Account Info" />-->
+
+      <!--<net.cachapa.expandablelayout.ExpandableLayout-->
+        <!--android:id="@+id/account_expandable_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/accordion_item_expandable_shadow"-->
+        <!--app:el_duration="500"-->
+        <!--app:el_expanded="true"-->
+        <!--app:el_parallax="0.5">-->
+
+        <!--<TextView-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="16dp"-->
+          <!--android:text="Fixed height" />-->
+
+      <!--</net.cachapa.expandablelayout.ExpandableLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="vertical">-->
+
+      <!--<TextView-->
+        <!--android:id="@+id/expand_button_services"-->
+        <!--style="@style/TextAppearance.AppCompat.Small"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/accordion_item_shadow"-->
+        <!--android:elevation="6dp"-->
+        <!--android:foreground="?selectableItemBackground"-->
+        <!--android:gravity="left"-->
+        <!--android:padding="16dp"-->
+        <!--android:text="> My Services" />-->
+
+      <!--<net.cachapa.expandablelayout.ExpandableLayout-->
+        <!--android:id="@+id/services_expandable_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/accordion_item_expandable_shadow"-->
+        <!--app:el_duration="500"-->
+        <!--app:el_expanded="false"-->
+        <!--app:el_parallax="0.5">-->
+
+        <!--<RelativeLayout-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="match_parent"-->
+          <!--android:minHeight="700dp">-->
+
+          <!--<co.ceryle.fitgridview.FitGridView-->
+            <!--android:id="@+id/fitgridServicesView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_below="@id/toolbarLayout"-->
+            <!--android:listSelector="@android:color/transparent"-->
+            <!--android:paddingLeft="5dp"-->
+            <!--android:paddingRight="5dp"-->
+            <!--app:column="3"-->
+            <!--app:row="7" />-->
+
+        <!--</RelativeLayout>-->
+
+
+      <!--</net.cachapa.expandablelayout.ExpandableLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="vertical">-->
+
+      <!--<TextView-->
+        <!--android:id="@+id/expand_button_products"-->
+        <!--style="@style/TextAppearance.AppCompat.Small"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/accordion_item_shadow"-->
+        <!--android:elevation="6dp"-->
+        <!--android:foreground="?selectableItemBackground"-->
+        <!--android:gravity="left"-->
+        <!--android:padding="16dp"-->
+        <!--android:text="> My Products" />-->
+
+      <!--<net.cachapa.expandablelayout.ExpandableLayout-->
+        <!--android:id="@+id/products_expandable_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/accordion_item_expandable_shadow"-->
+        <!--app:el_duration="500"-->
+        <!--app:el_expanded="false"-->
+        <!--app:el_parallax="0.5">-->
+
+        <!--<TextView-->
+          <!--android:layout_width="match_parent"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="16dp"-->
+          <!--android:text="Fixed height" />-->
+
+      <!--</net.cachapa.expandablelayout.ExpandableLayout>-->
+
+    <!--</LinearLayout>-->
+
+
+  <!--</LinearLayout>-->
+
+<!--</ScrollView>-->
