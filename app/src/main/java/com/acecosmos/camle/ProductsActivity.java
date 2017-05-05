@@ -35,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 import com.vansuita.pickimage.bean.PickResult;
 import com.vansuita.pickimage.bundle.PickSetup;
 import com.vansuita.pickimage.dialog.PickImageDialog;
@@ -81,6 +83,9 @@ public class ProductsActivity extends AppCompatActivity implements IPickResult {
     setSupportActionBar(toolbar);
 
     toolbar.setTitle("My Products");
+
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     prodKey = getIntent().getStringExtra("prodKey");
     isEdit = getIntent().getBooleanExtra("isEdit", false);
@@ -146,6 +151,12 @@ public class ProductsActivity extends AppCompatActivity implements IPickResult {
     }
   }
 
+  @Override
+  public boolean onSupportNavigateUp() {
+    onBackPressed();
+    return true;
+  }
+
   private void setPreFills() {
 
     firebaseRef.child("users/" + uid + "/products/" + prodKey).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -194,15 +205,35 @@ public class ProductsActivity extends AppCompatActivity implements IPickResult {
   @Override
   public void onPickResult(PickResult r) {
     if (r.getError() == null) {
-      imageURI = r.getUri();
-      Glide.clear(mProdImage);
-      Glide.with(ProductsActivity.this)
-        .load(imageURI)
-        .into(mProdImage);
-      mProdImage.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+//      imageURI = r.getUri();
+      CropImage.activity(r.getUri())
+        .setGuidelines(CropImageView.Guidelines.ON)
+        .setCropShape(CropImageView.CropShape.RECTANGLE)
+        .setFixAspectRatio(true)
+        .setOutputCompressQuality(75)
+        .start(this);
 
     } else {
       Toast.makeText(this, r.getError().getMessage(), Toast.LENGTH_LONG).show();
+    }
+  }
+
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+
+    if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+      CropImage.ActivityResult result = CropImage.getActivityResult(data);
+      if (resultCode == RESULT_OK) {
+        imageURI = result.getUri();
+        Glide.clear(mProdImage);
+        Glide.with(ProductsActivity.this)
+          .load(imageURI)
+          .into(mProdImage);
+        mProdImage.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+      } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+        Exception error = result.getError();
+      }
     }
   }
 
@@ -219,21 +250,21 @@ public class ProductsActivity extends AppCompatActivity implements IPickResult {
 
     if (imageURI != null) {
 
-      mProdImage.setDrawingCacheEnabled(true);
-      mProdImage.buildDrawingCache();
-      Bitmap bitmap = mProdImage.getDrawingCache();
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-      if (getMimeType(getApplicationContext(), imageURI).equals("jpg") || getMimeType(getApplicationContext(), imageURI).equals("jpeg")) {
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-      } else if (getMimeType(getApplicationContext(), imageURI).equals("png")) {
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-      }
-      byte[] data = baos.toByteArray();
+//      mProdImage.setDrawingCacheEnabled(true);
+//      mProdImage.buildDrawingCache();
+//      Bitmap bitmap = mProdImage.getDrawingCache();
+//      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//
+//      if (getMimeType(getApplicationContext(), imageURI).equals("jpg") || getMimeType(getApplicationContext(), imageURI).equals("jpeg")) {
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//      } else if (getMimeType(getApplicationContext(), imageURI).equals("png")) {
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//      }
+//      byte[] data = baos.toByteArray();
 
 
       storageRef = storage.getReference().child("images/" + imageURI.getLastPathSegment());
-      UploadTask uploadTask = storageRef.putBytes(data);
+      UploadTask uploadTask = storageRef.putFile(imageURI);
 
       // Register observers to listen for when the download is done or if it fails
       uploadTask.addOnFailureListener(new OnFailureListener() {

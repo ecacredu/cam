@@ -49,6 +49,8 @@ public class MyProductsActivity extends AppCompatActivity {
     setSupportActionBar(toolbar);
     toolbar.setTitle("My Products");
 
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     findViews();
     setViews();

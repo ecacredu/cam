@@ -1,7 +1,10 @@
 package com.acecosmos.camle.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.PreferenceFragment;
@@ -19,11 +22,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TableRow;
 import android.widget.Toast;
 
 import com.acecosmos.camle.MyProductsActivity;
 import com.acecosmos.camle.ProductSelectionActivity;
+import com.acecosmos.camle.ProductsActivity;
 import com.acecosmos.camle.R;
 import com.acecosmos.camle.ServicesActivity;
 import com.acecosmos.camle.adapters.FitServicesAdapter;
@@ -31,7 +36,10 @@ import com.acecosmos.camle.adapters.PrefAdapter;
 import com.acecosmos.camle.extras.ClickListener;
 import com.acecosmos.camle.extras.RecyclerTouchListener;
 import com.acecosmos.camle.models.Pref;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +47,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+import com.vansuita.pickimage.bean.PickResult;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+import com.vansuita.pickimage.listeners.IPickResult;
 
 import net.cachapa.expandablelayout.ExpandableLayout;
 
@@ -48,11 +65,13 @@ import java.util.List;
 
 import co.ceryle.fitgridview.FitGridView;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by sd on 28-04-2017.
  */
 
-public class MyAccountFragment extends Fragment {
+public class MyAccountFragment extends Fragment{
 
   private static final int REQ_SERVICES = 111;
   private static final int REQ_PRODUCTS = 222;
@@ -63,9 +82,19 @@ public class MyAccountFragment extends Fragment {
   private HashMap<String, Object> services;
   private HashMap<Object, Object> products;
 
+  private ImageButton mProdImage;
+  public Uri imageURI;
+  public Uri downloadUrl;
+  private FirebaseStorage storage;
+  private StorageReference storageRef;
+
   private DatabaseReference firebaseDatabase;
   private FirebaseAuth mAuth;
   private View mView;
+
+  public Context mContext;
+
+  public String existingImageUri;
 
   String uid;
   DataSnapshot profileSnap;
@@ -78,8 +107,14 @@ public class MyAccountFragment extends Fragment {
     mAuth = FirebaseAuth.getInstance();
     uid = mAuth.getCurrentUser().getUid().trim();
 
+    mContext = getContext();
+
+    mProdImage = (ImageButton) v.findViewById(R.id.user_image);
+
     services = new HashMap<>();
     products = new HashMap<>();
+
+    storage = FirebaseStorage.getInstance();
     firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("users/" + uid);
     firebaseDatabase.keepSynced(true);
 
@@ -92,6 +127,14 @@ public class MyAccountFragment extends Fragment {
         }
         for (DataSnapshot ps : dataSnapshot.child("products").getChildren()) {
           products.put(ps.child("type").getValue(), ps.getKey());
+        }
+        if(dataSnapshot.child("profile/image").getValue() != null){
+          existingImageUri = dataSnapshot.child("profile/image").getValue().toString();
+          Glide.clear(mProdImage);
+          Glide.with(mContext)
+            .load(existingImageUri)
+            .into(mProdImage);
+          mProdImage.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         }
         addPrefs();
       }
@@ -150,6 +193,31 @@ public class MyAccountFragment extends Fragment {
       }
     }));
 
+    mProdImage.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        PickImageDialog.build(new PickSetup())
+          .setOnPickResult(new IPickResult() {
+            @Override
+            public void onPickResult(PickResult r) {
+              //TODO: do what you have to...
+              if (r.getError() == null) {
+                CropImage.activity(r.getUri())
+                  .setGuidelines(CropImageView.Guidelines.ON)
+                  .setCropShape(CropImageView.CropShape.RECTANGLE)
+                  .setFixAspectRatio(true)
+                  .setOutputCompressQuality(75)
+                  .start(mContext,MyAccountFragment.this);
+
+              } else {
+                Toast.makeText(getContext(), r.getError().getMessage(), Toast.LENGTH_LONG).show();
+              }
+            }
+          }).show(getActivity());
+      }
+    });
+
     return v;
   }
 
@@ -198,7 +266,48 @@ public class MyAccountFragment extends Fragment {
     } else if (requestCode == REQ_PRODUCTS) {
       Toast.makeText(getContext(), "Products updated.", Toast.LENGTH_SHORT).show();
       updateDataRef();
+    }else if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+      CropImage.ActivityResult result = CropImage.getActivityResult(data);
+      if (resultCode == RESULT_OK) {
+        imageURI = result.getUri();
+        Glide.clear(mProdImage);
+        Glide.with(mContext)
+          .load(imageURI)
+          .into(mProdImage);
+        mProdImage.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        changeProfilePicture();
+      } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+        Exception error = result.getError();
+        Toast.makeText(getContext(), error+"", Toast.LENGTH_SHORT).show();
+      }
     }
+  }
+
+  private void changeProfilePicture() {
+
+    storageRef = storage.getReference().child("images/" + imageURI.getLastPathSegment());
+    UploadTask uploadTask = storageRef.putFile(imageURI);
+
+    // Register observers to listen for when the download is done or if it fails
+    uploadTask.addOnFailureListener(new OnFailureListener() {
+      @Override
+      public void onFailure(@NonNull Exception exception) {
+        // Handle unsuccessful uploads
+      }
+    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+      @Override
+      public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+        // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+        downloadUrl = taskSnapshot.getDownloadUrl();
+        firebaseDatabase.child("profile/image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+          @Override
+          public void onComplete(@NonNull Task<Void> task) {
+            Toast.makeText(mContext, "Profile updated.", Toast.LENGTH_SHORT).show();
+            updateDataRef();
+          }
+        });
+      }
+    });
   }
 
   private void EditProfile(String label, final String property, String defaultValue, final int position) {
@@ -253,22 +362,6 @@ public class MyAccountFragment extends Fragment {
       }
     });
 
-//    builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-//      @Override
-//      public void onClick(DialogInterface dialog, int which) {
-//        String strName = arrayAdapter.getItem(which);
-////        AlertDialog.Builder builderInner = new AlertDialog.Builder(getContext());
-////        builderInner.setMessage(strName);
-////        builderInner.setTitle("Your Selected Item is");
-////        builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-////          @Override
-////          public void onClick(DialogInterface dialog,int which) {
-////            dialog.dismiss();
-////          }
-////        });
-////        builderInner.show();
-//      }
-//    });
     builderSingle.show();
   }
 
@@ -299,6 +392,14 @@ public class MyAccountFragment extends Fragment {
         for (DataSnapshot ps : dataSnapshot.child("products").getChildren()) {
           products.put(ps.child("type").getValue(), ps.getKey());
         }
+        if(dataSnapshot.child("profile/image").getValue() != null){
+          existingImageUri = dataSnapshot.child("profile/image").getValue().toString();
+          Glide.clear(mProdImage);
+          Glide.with(mContext)
+            .load(existingImageUri)
+            .into(mProdImage);
+          mProdImage.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        }
       }
 
       @Override
@@ -321,4 +422,5 @@ public class MyAccountFragment extends Fragment {
   public void onPrefItemClicked(View view) {
 
   }
+
 }

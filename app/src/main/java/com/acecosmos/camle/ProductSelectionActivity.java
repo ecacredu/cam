@@ -75,6 +75,9 @@ public class ProductSelectionActivity  extends AppCompatActivity {
     firebaseRef = database.getReference("");
     mAuth = FirebaseAuth.getInstance();
 
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     findViews();
 
   }
